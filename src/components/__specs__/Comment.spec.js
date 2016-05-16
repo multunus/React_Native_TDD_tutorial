@@ -11,14 +11,14 @@ describe('<Comment />', () => {
     expect(wrapper.find(Text)).to.have.length(2);
   });
 
-    it('should render comment text', () => {
-      const wrapper = shallow(<Comment> This is a comment </Comment>);
-      expect(wrapper.contains(<Text> This is a comment </Text>)).to.equal(true);
-    });
+  it('should render comment text', () => {
+    const wrapper = shallow(<Comment> This is a comment </Comment>);
+    expect(wrapper.contains(<Text> This is a comment </Text>)).to.equal(true);
+  });
   
-    it('should render author name', () => {
-      const wrapper = shallow(<Comment author="Author"></Comment>);
-      expect(wrapper.contains(<Text>Author</Text>)).to.equal(true);
-    });
+  it('should render author name', () => {
+    const wrapper = shallow(<Comment author="Author"></Comment>);
+    expect(wrapper.contains(<Text>Author</Text>)).to.equal(true);
+  });
   
 });
