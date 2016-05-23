@@ -12,6 +12,8 @@ describe('<Comment />', () => {
     expect(wrapper.instance().props.children).to.equal("");
   });
 
+  // pending specs to check propTypes
+
   it('should render 2 text components', () => {
     const wrapper = shallow(<Comment />);
     expect(wrapper.find(Text)).to.have.length(2);
