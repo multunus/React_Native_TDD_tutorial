@@ -16,10 +16,10 @@ export default class Comment extends React.Component {
     return(
       <View>
         <Text>
-        {this.props.author}
+          {this.props.author}
         </Text>
         <Text>
-        {this.props.children}
+          {this.props.children}
         </Text>
         </View>
     );

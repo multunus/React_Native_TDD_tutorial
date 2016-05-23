@@ -14,9 +14,9 @@ describe('<CommentList />', () => {
     ];
   });
 
-  it('should render 1 view components', () => {
+  it('should be a view component', () => {
     const wrapper = shallow(<CommentList data={data} />);
-    expect(wrapper.find(View)).to.have.length(1);
+    expect(wrapper.type()).to.equal(View);
   });
 
   it('should render comment components with correct comment text', () => {

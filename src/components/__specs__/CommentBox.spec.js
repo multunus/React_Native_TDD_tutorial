@@ -9,9 +9,9 @@ import CommentForm from '../CommentForm.js';
 
 describe('<CommentBox />', () => {
 
-  it('should render 1 view components', () => {
+  it('should be a view component', () => {
     const wrapper = shallow(<CommentBox />);
-    expect(wrapper.find(View)).to.have.length(1);
+    expect(wrapper.type()).to.equal(View);
   });
 
   it('should render have a title Comment It', () => {
