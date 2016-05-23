@@ -1,4 +1,4 @@
-import React, { View } from 'react-native';
+import React, { View, ListView } from 'react-native';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
@@ -14,26 +14,21 @@ describe('<CommentList />', () => {
     ];
   });
 
-  it('should be a view component', () => {
+  it('should be a ListView component', () => {
     const wrapper = shallow(<CommentList data={data} />);
-    expect(wrapper.type()).to.equal(View);
+    expect(wrapper.type()).to.equal(ListView);
   });
 
-  it('should render comment components with correct comment text', () => {
-    const wrapper = shallow(<CommentList data={data}/>);
-    for(var index in data) {
-      comment = data[index];
-      expect(wrapper.contains(comment.text)).to.equal(true);
-    }
+  it('should have correct initial state datasource', () => {
+    const wrapper = shallow(<CommentList data={data} />);
+    expect(wrapper.state('dataSource')._dataBlob).to.equal(data);
   });
 
-  it('should render comment components with correct props for each entry in data array', () => {
+  it('should be a ListView component with correct props', () => {
+    var dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(data);
     const wrapper = shallow(<CommentList data={data} />);
-    expect(wrapper.find(Comment)).to.have.length(3);
-    for(var index in data) {
-      comment = data[index];
-      expect(wrapper.find({author: comment.author})).to.have.length(1);
-      expect(wrapper.find({id: comment.id})).to.have.length(1);
-    }
+    wrapper.setState({dataSource: dataSource});
+
+    expect(wrapper.find(ListView).shallow().instance().props.dataSource).to.equal(dataSource);
   });
 });
