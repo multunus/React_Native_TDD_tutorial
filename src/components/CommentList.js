@@ -8,7 +8,7 @@ export default class CommentList extends React.Component {
     dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.props.data)
   };
 }
-
+  
 render() {
   return (
     <ListView
