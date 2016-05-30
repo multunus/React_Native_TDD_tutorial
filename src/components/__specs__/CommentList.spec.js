@@ -23,12 +23,4 @@ describe('<CommentList />', () => {
     const wrapper = shallow(<CommentList data={data} />);
     expect(wrapper.state('dataSource')._dataBlob).to.equal(data);
   });
-
-  it('should be a ListView component with correct props', () => {
-    var dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(data);
-    const wrapper = shallow(<CommentList data={data} />);
-    wrapper.setState({dataSource: dataSource});
-
-    expect(wrapper.find(ListView).shallow().instance().props.dataSource).to.equal(dataSource);
-  });
 });

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha --require test/setup-tests.js --recursive src/**/__specs__/*.spec.js",
+    "test": "mocha --require test/setup-tests.js  src/__specs__/*.spec.js  --recursive src/**/__specs__/*.spec.js",
     "watch:test": "mocha --require test/setup-tests.js --recursive src/**/__specs__/*.spec.js --watch",
     "cover": "nyc --reporter=lcov --reporter=text --reporter=html npm run test",
     "remotedev": "remotedev --hostname=localhost --port=8000",

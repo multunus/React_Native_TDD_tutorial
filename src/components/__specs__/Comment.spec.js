@@ -11,13 +11,13 @@ describe('<Comment />', () => {
     expect(wrapper.instance().props.author).to.equal("");
     expect(wrapper.instance().props.children).to.equal("");
   });
-
+  
   it('should be a view component', () => {
     const wrapper = shallow(<Comment></Comment>);
     expect(wrapper.type()).to.equal(View);
   });
 
-  it('should define its propTypes', () => {
+  xit('should define its propTypes', () => {
     console.log(Comment.propTypes);
   });
 

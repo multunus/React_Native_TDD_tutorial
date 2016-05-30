@@ -28,4 +28,15 @@ describe('<CommentBox />', () => {
     const wrapper = shallow(<CommentBox />);
     expect(wrapper.find(CommentForm)).to.have.length(1);
   });
+
+  it('should pass its data props to commentlist component', () => {
+    var data = [
+      {id: 1, author: "Pete Hunt", text: "This is one comment"},
+      {id: 2, author: "Jordan Walke", text: "This is a super comment"},
+      {id: 3, author: "Jordan Walkerr", text: "This is an ordinary comment"}
+    ];
+
+    const wrapper = shallow(<CommentBox data = {data}/>);
+    expect(wrapper.find(CommentList).props().data).to.eql(data);
+  });
 });
