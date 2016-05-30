@@ -32,5 +32,6 @@ export default class CommentForm extends React.Component {
   }
 
   _onPressButton() {
+    this.props.onCommentSubmit();    
   }
 }
