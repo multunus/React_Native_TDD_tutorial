@@ -8,9 +8,9 @@ import Comment from '../Comment.js';
 describe('<CommentList />', () => {
   beforeEach(function() {
     data = [
-      {id: 1, author: "Pete Hunt", text: "This is one comment"},
-      {id: 2, author: "Jordan Walke", text: "This is a super comment"},
-      {id: 3, author: "Jordan Walkerr", text: "This is an ordinary comment"}
+      { author: "Pete Hunt", text: "This is one comment"},
+      { author: "Jordan Walke", text: "This is a super comment"},
+      { author: "Jordan Walkerr", text: "This is an ordinary comment"}
     ];
   });
 

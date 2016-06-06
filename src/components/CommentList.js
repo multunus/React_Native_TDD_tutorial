@@ -20,7 +20,7 @@ render() {
 
   renderComment(row) {
     return (
-        <Comment author={row.author} id={row.id}>{row.text}</Comment>
+        <Comment author={row.author} >{row.text}</Comment>
     );
   }
 }

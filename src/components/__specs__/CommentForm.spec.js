@@ -67,6 +67,8 @@ describe('<CommentForm />', () => {
   });
 
   it('sets the state of two input fields to the initial state on press', () => {
+    sinon.stub(CommentBox.prototype, "handleCommentSubmit");
+    const wrapper = shallow(<CommentForm  onCommentSubmit={CommentBox.prototype.handleCommentSubmit}/>);
     const submitButton = wrapper.find('TouchableNativeFeedback').first();
     wrapper.setState({name: 'JK'});
     wrapper.setState({comment: 'Arsenal is the best'});
@@ -75,5 +77,6 @@ describe('<CommentForm />', () => {
 
     expect(wrapper.state('name')).to.equal("");
     expect(wrapper.state('comment')).to.equal("");
+    CommentBox.prototype.handleCommentSubmit.restore();
   });
 });
