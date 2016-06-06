@@ -40,8 +40,16 @@ describe('<CommentBox />', () => {
     expect(wrapper.find(CommentForm).props().onCommentSubmit).to.eql(CommentBox.prototype.handleCommentSubmit);
   });
 
-  describe('getComments', () => {
-    it('stores comment data using asyncstorage on comment submit', () => {
+  xit('loads comments from Async Storage and sets it as state.data', () => {
+    var comments = [{author: 'Sulaiman', text: 'Hey'}];
+    AsyncStorage.setItem("comments", JSON.stringify(comments));
+    
+    var wrapper = shallow(<CommentBox asyncStorageKey={'comments'} />);
+    expect(wrapper.state('data')).to.eq(comments);
+  });
+  
+  describe('handleCommentSubmit', () => {
+    xit('stores comment data using asyncstorage on comment submit', () => {
       var wrapper = shallow(<CommentBox asyncStorageKey={'comments'} />);
       wrapper.setState({data: [{author: 'Sulaiman', text: 'Hey'}]});
       var commentData = {author: "Sony", text: "La dolce vita"};
@@ -55,4 +63,6 @@ describe('<CommentBox />', () => {
       expect(fetchedData[0].author).not.to.equal(expectedData[0].author);   
     });
   });
+
+  
 });

@@ -8,6 +8,7 @@ export default class CommentBox extends React.Component {
     super(props);
     this.state = {data: []};
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+    this.getComments = this.getComments.bind(this);
   }
 
   componentDidMount() {
@@ -16,9 +17,10 @@ export default class CommentBox extends React.Component {
   }
   
   getComments() {
+    var _this = this;
     AsyncStorage.getItem('comments', (err, result) => {
       comments = JSON.parse(result);
-      this.state = {data: comments};
+      _this.state = {data: comments};
     });
   }
   
