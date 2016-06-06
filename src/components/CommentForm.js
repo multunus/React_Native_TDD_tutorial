@@ -12,17 +12,17 @@ export default class CommentForm extends React.Component {
           <TextInput
            placeholder="name"
            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-           onChangeText={(name) => this.setState({name})}
+           onChangeText={(text) => this.setState({name: text})}
            value={this.state.name}
           />
           <TextInput
            placeholder="comment"
            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-           onChangeText={(comment) => this.setState({comment})}
+           onChangeText={(content) => this.setState({comment: content})}
            value={this.state.comment}
           />
-          <TouchableNativeFeedback
-           onPress={this._onPressButton()}>
+        <TouchableNativeFeedback
+           onPress={() => this.onPressButton()}>
            <View style={{width: 150, height: 100, backgroundColor: 'red'}}>
              <Text style={{margin: 30}}>Submit</Text>
            </View>
@@ -31,7 +31,10 @@ export default class CommentForm extends React.Component {
     );
   }
 
-  _onPressButton() {
-    this.props.onCommentSubmit();    
+  onPressButton() {
+    var author = this.state.name.trim();
+    var comment = this.state.comment.trim();
+    this.props.onCommentSubmit({author: author, text: comment});
+    this.state = {name: '', comment: ''};
   }
 }

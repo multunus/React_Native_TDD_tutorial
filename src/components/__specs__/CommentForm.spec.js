@@ -41,8 +41,9 @@ describe('<CommentForm />', () => {
 
   it('the author input component should change state when text changes', () => {
     const authorInputComponent = wrapper.find('TextInput').first();
-    authorInputComponent.simulate('ChangeText','arsenal');
-    expect(wrapper.state('name')).to.equal('arsenal');
+    
+    authorInputComponent.simulate('ChangeText','wenger');
+    expect(wrapper.state('name')).to.equal('wenger');
   });
 
   it('the comment input component should change state when text changes', () => {
@@ -50,18 +51,29 @@ describe('<CommentForm />', () => {
     commentInputComponent.simulate('ChangeText','arsenal');
     expect(wrapper.state('comment')).to.equal('arsenal');
   });
-
-  it('the comment input component should change state when text changes', () => {
-    const commentInputComponent = wrapper.find('TextInput').at(1);
-    commentInputComponent.simulate('ChangeText','arsenal');
-    expect(wrapper.state('comment')).to.equal('arsenal');
-  });
-
-  it('invokes handleCommitSubmit mathod of CommentBox', () => {
+  
+  it('invokes handleCommitSubmit method of CommentBox with author and comment', () => {
     sinon.stub(CommentBox.prototype, "handleCommentSubmit");
-    const  wrapper = shallow(<CommentForm  onCommentSubmit={CommentBox.prototype.handleCommentSubmit}/>);
+
+    const wrapper = shallow(<CommentForm  onCommentSubmit={CommentBox.prototype.handleCommentSubmit}/>);
     const submitButton = wrapper.find('TouchableNativeFeedback').first();
+    wrapper.setState({name: 'JK  '});
+    wrapper.setState({comment: '  Arsenal is the best'});
+
     submitButton.simulate('press');
-    expect(CommentBox.prototype.handleCommentSubmit.calledOnce).to.be.true;
+    
+    expect(CommentBox.prototype.handleCommentSubmit.calledWith({author: 'JK', text: 'Arsenal is the best'})).to.be.true;
+    CommentBox.prototype.handleCommentSubmit.restore();
+  });
+
+  it('sets the state of two input fields to the initial state on press', () => {
+    const submitButton = wrapper.find('TouchableNativeFeedback').first();
+    wrapper.setState({name: 'JK'});
+    wrapper.setState({comment: 'Arsenal is the best'});
+
+    submitButton.simulate('press');
+
+    expect(wrapper.state('name')).to.equal("");
+    expect(wrapper.state('comment')).to.equal("");
   });
 });
