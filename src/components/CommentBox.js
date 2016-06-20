@@ -6,7 +6,7 @@ import CommentForm from './CommentForm.js';
 export default class CommentBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {data: ['dfgs']};
+    this.state = {data: []};
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     this.getComments = this.getComments.bind(this);
   }
@@ -38,9 +38,9 @@ export default class CommentBox extends React.Component {
   render() {
     return(
         <View>
-        <Text>Comment It</Text>
-        <CommentList data={this.state.data}/>
-        <CommentForm onCommentSubmit={this.handleCommentSubmit}/>
+          <Text>Comment It</Text>
+          <CommentList data={this.state.data}/>
+          <CommentForm onCommentSubmit={this.handleCommentSubmit}/>
         </View>
     );
   }

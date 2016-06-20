@@ -16,7 +16,7 @@ describe('<CommentBox />', () => {
   it('should define its propTypes', () => {
     expect(CommentBox.propTypes.asyncStorageKey).to.be.an('function');
   });
-  
+
   it('should be a view component', () => {
     expect(wrapper.type()).to.equal(View);
   });
@@ -32,7 +32,7 @@ describe('<CommentBox />', () => {
   it('should render comment form component', () => {
     expect(wrapper.find(CommentForm)).to.have.length(1);
   });
-  
+
   it('should have an initial state', () => {
     expect(wrapper.state('data').length).to.equal(0);
   });
@@ -40,19 +40,19 @@ describe('<CommentBox />', () => {
   it('should pass its state data as props to commentlist component', () => {
     expect(wrapper.find(CommentList).props().data).to.eql(wrapper.state('data'));
   });
-  
-  xit('should pass its handleCommentSubmit method as props to Commentform component', () => {    
-    expect(wrapper.find(CommentForm).props().onCommentSubmit).to.eql(CommentBox.prototype.handleCommentSubmit);
+
+  it('should pass its handleCommentSubmit method as props to CommentForm component', () => {
+    expect(wrapper.find(CommentForm).props().onCommentSubmit).to.equal(CommentBox.prototype.handleCommentSubmit);
   });
 
   xit('loads comments from Async Storage and sets it as state.data', () => {
     var comments = [{author: 'Sulaiman', text: 'Hey'}];
     AsyncStorage.setItem("comments", JSON.stringify(comments));
-    
+
     var wrapper = shallow(<CommentBox asyncStorageKey={'comments'} />);
     expect(wrapper.state('data')).to.eq(comments);
   });
-  
+
   describe('handleCommentSubmit', () => {
     xit('stores comment data using asyncstorage on comment submit', () => {
       var wrapper = shallow(<CommentBox asyncStorageKey={'comments'} />);
@@ -65,9 +65,9 @@ describe('<CommentBox />', () => {
         fetchedData = JSON.parse(result);
         expectedData = [{author: 'Sulaimannnn', text: 'Hey'}, {author: "Sony", text: "La dolce vita"}];
       });
-      expect(fetchedData[0].author).not.to.equal(expectedData[0].author);   
+      expect(fetchedData[0].author).not.to.equal(expectedData[0].author);
     });
   });
 
-  
+
 });

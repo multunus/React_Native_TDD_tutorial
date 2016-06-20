@@ -23,7 +23,7 @@ describe('<CommentList />', () => {
     expect(wrapper.type()).to.equal(ListView);
   });
 
-  it('should have correct initial state datasource', () => {
+  it('should have correct state datasource', () => {
     const wrapper = shallow(<CommentList data={data} />);
     expect(wrapper.state('dataSource')._dataBlob).to.equal(data);
   });
