@@ -12,6 +12,11 @@ describe('<CommentBox />', () => {
   beforeEach(function() {
      wrapper = shallow(<CommentBox asyncStorageKey={'comments'} />);
   });
+
+  it('should define its propTypes', () => {
+    expect(CommentBox.propTypes.asyncStorageKey).to.be.an('function');
+  });
+  
   it('should be a view component', () => {
     expect(wrapper.type()).to.equal(View);
   });

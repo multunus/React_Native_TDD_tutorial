@@ -6,10 +6,15 @@ import CommentForm from './CommentForm.js';
 export default class CommentBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {data: []};
+    this.state = {data: ['dfgs']};
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     this.getComments = this.getComments.bind(this);
   }
+
+  static propTypes =  {
+    asyncStorageKey: React.PropTypes.string
+  };
+
 
   componentDidMount() {
     this.getComments();

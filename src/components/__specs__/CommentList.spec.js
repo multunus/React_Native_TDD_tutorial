@@ -14,6 +14,10 @@ describe('<CommentList />', () => {
     ];
   });
 
+  it('should define its propTypes', () => {
+    expect(CommentList.propTypes.data).to.be.an('function');
+  });
+
   it('should be a ListView component', () => {
     const wrapper = shallow(<CommentList data={data} />);
     expect(wrapper.type()).to.equal(ListView);
