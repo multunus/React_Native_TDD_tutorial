@@ -16,7 +16,7 @@ export default class CommentBox extends React.Component {
   };
   
   getComments() {
-    AsyncStorage.getItem('comments')
+    AsyncStorage.getItem(this.props.asyncStorageKey)
       .then((comments) => {
         comments = JSON.parse(comments);
         this.setState({ data: comments });
@@ -28,7 +28,7 @@ export default class CommentBox extends React.Component {
   handleCommentSubmit(comment_data) {
     var comments = this.state.data;
     comments.push(comment_data);
-    AsyncStorage.setItem("comments", JSON.stringify(comments));
+    AsyncStorage.setItem(this.props.asyncStorageKey, JSON.stringify(comments));
     this.getComments();
   }
   
