@@ -2,6 +2,10 @@ import React, {Component, View, ListView} from 'react-native';
 import Comment from './Comment.js';
 
 export default class CommentList extends React.Component {
+  static propTypes =  {
+    data: React.PropTypes.array
+  };
+  
   constructor(props) {
     super(props);
     this.state =  {
@@ -9,15 +13,17 @@ export default class CommentList extends React.Component {
     };
   }
   
-  static propTypes =  {
-    data: React.PropTypes.array
-  };
+  componentWillReceiveProps(){
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this.props.data)
+    });
+  }
   
   render() {
     return (
         <ListView
-           dataSource={this.state.dataSource}
-           renderRow={this.renderComment.bind(this)}
+          dataSource={this.state.dataSource}
+          renderRow={this.renderComment.bind(this)}
         />
     );
   }

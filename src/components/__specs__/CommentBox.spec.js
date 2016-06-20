@@ -37,12 +37,15 @@ describe('<CommentBox />', () => {
     expect(wrapper.state('data').length).to.equal(0);
   });
 
-  it('should pass its state data as props to commentlist component', () => {
+ it('should pass its state data as props to commentlist component', () => {
     expect(wrapper.find(CommentList).props().data).to.eql(wrapper.state('data'));
   });
 
   it('should pass its handleCommentSubmit method as props to CommentForm component', () => {
-    expect(wrapper.find(CommentForm).props().onCommentSubmit).to.equal(CommentBox.prototype.handleCommentSubmit);
+    commentBox = new CommentBox();
+    var definedMethod = commentBox.handleCommentSubmit;
+    var passedMethod = wrapper.find(CommentForm).props().onCommentSubmit;
+    expect(definedMethod.toString()).to.equal(passedMethod.toString());
   });
 
   xit('loads comments from Async Storage and sets it as state.data', () => {
@@ -50,7 +53,7 @@ describe('<CommentBox />', () => {
     AsyncStorage.setItem("comments", JSON.stringify(comments));
 
     var wrapper = shallow(<CommentBox asyncStorageKey={'comments'} />);
-    expect(wrapper.state('data')).to.eq(comments);
+    return expect(wrapper.state('data')).to.eventually.deep.equal(comments);
   });
 
   describe('handleCommentSubmit', () => {

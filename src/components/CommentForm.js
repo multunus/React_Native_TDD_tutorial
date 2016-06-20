@@ -39,7 +39,7 @@ export default class CommentForm extends React.Component {
   onPressButton() {
     var author = this.state.name.trim();
     var comment = this.state.comment.trim();
-    this.props.onCommentSubmit({author: author, text: comment});
     this.state = {name: '', comment: ''};
+    this.props.onCommentSubmit({author: author, text: comment});
   }
 }

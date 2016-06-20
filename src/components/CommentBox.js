@@ -1,4 +1,4 @@
-import React, {Component,Text, View, AsyncStorage} from 'react-native';
+import React, {Component,Text, View, AsyncStorage, Alert} from 'react-native';
 
 import CommentList from './CommentList.js';
 import CommentForm from './CommentForm.js';
@@ -14,25 +14,22 @@ export default class CommentBox extends React.Component {
   static propTypes =  {
     asyncStorageKey: React.PropTypes.string
   };
-
-
-  componentDidMount() {
-    this.getComments();
-    setInterval(this.getComments, 2000);
-  }
   
   getComments() {
-    var _this = this;
-    AsyncStorage.getItem('comments', (err, result) => {
-      comments = JSON.parse(result);
-      _this.state = {data: comments};
-    });
+    AsyncStorage.getItem('comments')
+      .then((comments) => {
+        comments = JSON.parse(comments);
+        this.setState({ data: comments });
+      })
+      .catch(() => {
+      });
   }
   
   handleCommentSubmit(comment_data) {
     var comments = this.state.data;
     comments.push(comment_data);
     AsyncStorage.setItem("comments", JSON.stringify(comments));
+    this.getComments();
   }
   
   render() {
