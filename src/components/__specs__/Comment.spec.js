@@ -17,8 +17,9 @@ describe('<Comment />', () => {
     expect(wrapper.type()).to.equal(View);
   });
 
-  xit('should define its propTypes', () => {
-    console.log(Comment.propTypes);
+  it('should define its propTypes', () => {
+    expect(Comment.propTypes.author).to.be.an('function');
+    expect(Comment.propTypes.children).to.be.an('function');
   });
 
   it('should render 2 text components', () => {
