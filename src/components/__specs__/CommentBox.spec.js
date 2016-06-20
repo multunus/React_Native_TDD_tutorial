@@ -56,7 +56,7 @@ describe('<CommentBox />', () => {
     });
   });
 
-  describe('handleCommentSubmit', () => {
+  describe('getComments', () => {
     xit('loads stored comments and update the state', () => { 
     });
   });
