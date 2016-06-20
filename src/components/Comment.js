@@ -14,13 +14,13 @@ export default class Comment extends React.Component {
 
   render() {
     return(
-      <View>
-        <Text>
-          {this.props.author}
-        </Text>
-        <Text>
-          {this.props.children}
-        </Text>
+        <View>
+         <Text>
+           {this.props.author}
+          </Text>
+          <Text>
+           {this.props.children}
+          </Text>
         </View>
     );
   }
