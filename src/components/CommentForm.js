@@ -5,6 +5,11 @@ export default class CommentForm extends React.Component {
     super(props);
     this.state = {name: '', comment: ''};
   }
+
+  static propTypes =  {
+    onCommentSubmit: React.PropTypes.func
+  };
+
   
   render() {
     return(

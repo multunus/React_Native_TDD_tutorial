@@ -10,6 +10,10 @@ describe('<CommentForm />', () => {
   beforeEach(function() {
      wrapper = shallow(<CommentForm  onCommentSubmit={CommentBox.prototype.handleCommentSubmit}/>);
   });
+
+  it('should define its propTypes', () => {
+    expect(CommentForm.propTypes.onCommentSubmit).to.be.an('function');
+  });
   
   it('should be a view component', () => {
     expect(wrapper.type()).to.equal(View);
@@ -20,7 +24,7 @@ describe('<CommentForm />', () => {
     expect(wrapper.state('comment')).to.equal("");
   });
 
-  it('should have 2 text input components', () => {
+  it('should have 2 TextInput components', () => {
     expect(wrapper.find(TextInput)).to.have.length(2);
   });
 
