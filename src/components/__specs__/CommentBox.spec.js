@@ -70,11 +70,13 @@ describe('<CommentBox />', () => {
         { author: "Jordan Walkerr", text: "This is an ordinary comment"}
       ];
       commentBox = new CommentBox({asyncStorageKey: 'comments'});
+      commentBox.state.data = data;
       var commentData = {author: 'JK', text: 'Arsenal is the best'};
-      var new_data = data.push(commentData);
+      data.push(commentData);
       var spy = sinon.spy(AsyncStorage, "setItem");
       commentBox.handleCommentSubmit(commentData);
       expect(spy.calledOnce).to.be.true;
+      expect(spy.calledWith('comments', JSON.stringify(data))).to.be.true;
     });
 
     it('invokes the getComments method', () => {
@@ -84,7 +86,6 @@ describe('<CommentBox />', () => {
         { author: "Jordan Walkerr", text: "This is an ordinary comment"}
       ];
       commentBox = new CommentBox({asyncStorageKey: 'comments'});
-      commentBox.setState({data:  data});
       sinon.stub(commentBox, "getComments");
       var commentData = {author: 'JK', text: 'Arsenal is the best'};
       commentBox.handleCommentSubmit(commentData);
