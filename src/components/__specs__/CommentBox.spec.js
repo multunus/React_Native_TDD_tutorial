@@ -48,6 +48,20 @@ describe('<CommentBox />', () => {
     expect(definedMethod.toString()).to.equal(passedMethod.toString());
   });
   
+  describe('getComments', () => {
+    xit('loads stored comments and update the state', () => {
+      var  data = [
+        { author: "Pete Hunt", text: "This is one comment"},
+        { author: "Jordan Walke", text: "This is a super comment"},
+        { author: "Jordan Walkerr", text: "This is an ordinary comment"}
+      ];
+      AsyncStorage.setItem('comments', data);
+      commentBox = new CommentBox({asyncStorageKey: 'comments'});
+      commentBox.getComments();
+      expect(commentBox.state).to.eql({data: data});    
+    });
+  });
+  
   describe('handleCommentSubmit', () => {
     xit('stores comment data using asyncstorage on comment submit', () => {
       var  data = [
@@ -82,20 +96,6 @@ describe('<CommentBox />', () => {
       var commentData = {author: 'JK', text: 'Arsenal is the best'};
       commentBox.handleCommentSubmit(commentData);
       expect(commentBox.getComments.calledOnce).to.be.true;
-    });
-  });
-  
-  describe('getComments', () => {
-    xit('loads stored comments and update the state', () => {
-      var  data = [
-        { author: "Pete Hunt", text: "This is one comment"},
-        { author: "Jordan Walke", text: "This is a super comment"},
-        { author: "Jordan Walkerr", text: "This is an ordinary comment"}
-      ];
-      AsyncStorage.setItem('comments', data);
-      commentBox = new CommentBox({asyncStorageKey: 'comments'});
-      commentBox.getComments();
-      expect(commentBox.state).to.eql({data: data});    
     });
   });
 });
