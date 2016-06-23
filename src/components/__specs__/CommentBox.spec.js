@@ -40,14 +40,14 @@ describe('<CommentBox />', () => {
   it('should pass its state data as props to commentlist component', () => {
     expect(wrapper.find(CommentList).props().data).to.eql(wrapper.state('data'));
   });
-  
+
   it('should pass its handleCommentSubmit method as props to CommentForm component', () => {
     commentBox = new CommentBox();
     var definedMethod = commentBox.handleCommentSubmit;
     var passedMethod = wrapper.find(CommentForm).props().onCommentSubmit;
     expect(definedMethod.toString()).to.equal(passedMethod.toString());
   });
-  
+
   describe('getComments', () => {
     xit('loads stored comments and update the state', () => {
       var  data = [
@@ -58,33 +58,26 @@ describe('<CommentBox />', () => {
       AsyncStorage.setItem('comments', data);
       commentBox = new CommentBox({asyncStorageKey: 'comments'});
       commentBox.getComments();
-      expect(commentBox.state).to.eql({data: data});    
+      expect(commentBox.state).to.eql({data: data});
     });
   });
-  
+
   describe('handleCommentSubmit', () => {
-    xit('stores comment data using asyncstorage on comment submit', () => {
+    it('stores comment data using asyncstorage on comment submit', () => {
       var  data = [
         { author: "Pete Hunt", text: "This is one comment"},
         { author: "Jordan Walke", text: "This is a super comment"},
         { author: "Jordan Walkerr", text: "This is an ordinary comment"}
       ];
       commentBox = new CommentBox({asyncStorageKey: 'comments'});
-      commentBox.setState({data:  data});
       var commentData = {author: 'JK', text: 'Arsenal is the best'};
+      var new_data = data.push(commentData);
+      var spy = sinon.spy(AsyncStorage, "setItem");
       commentBox.handleCommentSubmit(commentData);
-
-      storedComments = AsyncStorage.getItem(this.props.asyncStorageKey)
-        .then((comments) => {
-          comments = JSON.parse(comments);
-          return comments;
-        });
-
-      expect(storedComments).to.equal(123);
+      expect(spy.calledOnce).to.be.true;
     });
 
     it('invokes the getComments method', () => {
-      
       var  data = [
         { author: "Pete Hunt", text: "This is one comment"},
         { author: "Jordan Walke", text: "This is a super comment"},
