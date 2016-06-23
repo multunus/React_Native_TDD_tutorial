@@ -10,7 +10,7 @@ import CommentForm from '../CommentForm.js';
 
 describe('<CommentBox />', () => {
   beforeEach(function() {
-     wrapper = shallow(<CommentBox asyncStorageKey={'comments'} />);
+    wrapper = shallow(<CommentBox asyncStorageKey={'comments'} />);
   });
 
   it('should define its propTypes', () => {
@@ -50,14 +50,52 @@ describe('<CommentBox />', () => {
   
   describe('handleCommentSubmit', () => {
     xit('stores comment data using asyncstorage on comment submit', () => {
+      var  data = [
+        { author: "Pete Hunt", text: "This is one comment"},
+        { author: "Jordan Walke", text: "This is a super comment"},
+        { author: "Jordan Walkerr", text: "This is an ordinary comment"}
+      ];
+      commentBox = new CommentBox({asyncStorageKey: 'comments'});
+      commentBox.setState({data:  data});
+      var commentData = {author: 'JK', text: 'Arsenal is the best'};
+      commentBox.handleCommentSubmit(commentData);
+
+      storedComments = AsyncStorage.getItem(this.props.asyncStorageKey)
+        .then((comments) => {
+          comments = JSON.parse(comments);
+          return comments;
+        });
+
+      expect(storedComments).to.equal(123);
     });
 
-    xit('invokes the getComments method', () => {
+    it('invokes the getComments method', () => {
+      
+      var  data = [
+        { author: "Pete Hunt", text: "This is one comment"},
+        { author: "Jordan Walke", text: "This is a super comment"},
+        { author: "Jordan Walkerr", text: "This is an ordinary comment"}
+      ];
+      commentBox = new CommentBox({asyncStorageKey: 'comments'});
+      commentBox.setState({data:  data});
+      sinon.stub(commentBox, "getComments");
+      var commentData = {author: 'JK', text: 'Arsenal is the best'};
+      commentBox.handleCommentSubmit(commentData);
+      expect(commentBox.getComments.calledOnce).to.be.true;
     });
   });
-
+  
   describe('getComments', () => {
-    xit('loads stored comments and update the state', () => { 
+    xit('loads stored comments and update the state', () => {
+      var  data = [
+        { author: "Pete Hunt", text: "This is one comment"},
+        { author: "Jordan Walke", text: "This is a super comment"},
+        { author: "Jordan Walkerr", text: "This is an ordinary comment"}
+      ];
+      AsyncStorage.setItem('comments', data);
+      commentBox = new CommentBox({asyncStorageKey: 'comments'});
+      commentBox.getComments();
+      expect(commentBox.state).to.eql({data: data});    
     });
   });
 });
