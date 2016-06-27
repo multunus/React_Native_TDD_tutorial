@@ -1,4 +1,4 @@
-import React, {Component,Text, View, AsyncStorage, Alert} from 'react-native';
+import React, {Component,Text, View, AsyncStorage } from 'react-native';
 
 import CommentList from './CommentList.js';
 import CommentForm from './CommentForm.js';
